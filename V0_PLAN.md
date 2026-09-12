@@ -292,13 +292,13 @@ printf '\n'
 
 - [x] 复查 `.gitignore` 是否完整。
 - [x] 创建 GitHub 仓库（按用户选择复用现有 `moboneC-137/-project`）。
-- [ ] 把本地代码推送到 GitHub。
+- [x] 把本地代码发布到 GitHub（通过已连接的 GitHub 工具完成）。
 
 **Verification:** GitHub 仓库中存在源代码，且不包含虚拟环境、缓存或 API key。
 
 2026-09-12 发布前本地检查完成：补充 `.venv-*/`、`venv/`、`*.py[cod]` 和 `.env.*` 忽略规则，保留 `.env.example` 可提交。`git check-ignore` 确认虚拟环境及其备份、Python/pytest 缓存、`.env`、`.env.local` 和 `.DS_Store` 被排除；13 个待上传文件和当前 Git 历史未匹配到常见 OpenAI/GitHub token 或私钥标记（模式扫描不等于穷尽检查）。清除测试启动环境的 `OPENAI_API_KEY` 后运行完整套件，结果为 **55 passed, 16 subtests passed**，`git diff --check` 通过。
 
-用户已选择复用现有仓库 `https://github.com/moboneC-137/-project`，已将其配置为 `origin` 并读取 `main` 分支历史。远端原有 README、MIT License 和 Python `.gitignore` 模板；发布时保留这些文件及历史，并合并本地忽略规则。代码推送和远端验证待完成。Step 3.5 的真实 API 验收状态不变。
+发布完成：复用用户选定的仓库 `https://github.com/moboneC-137/-project`，本地远端名为 `origin`。因本机 HTTPS Git 未配置登录凭据，命令行 `git push` 未成功；随后通过已连接的 GitHub 工具创建提交 `238469e` 并正常推进 `main`，保留远端原有 README、MIT License 和提交历史，同时合并 `.gitignore` 规则。通过 `git fetch` 读取该提交后，比对本地与远端完整 Git tree，SHA 均为 `2dca49b3ed474b9349f384c1ec5cb2a84dec0850`；远端共有 15 个文件，包含源码、测试、示例和依赖清单，不包含虚拟环境或缓存。原本地提交历史保留在 `local-v0-history` 分支，`main` 用于跟踪已发布的 `origin/main`。后续若使用命令行推送，仍需在本机配置 GitHub 登录。Step 3.5 的真实 API 验收状态不变；下一开发步骤为 Step 5.2 使用文档。
 
 ### Step 5.2 - Write usage documentation
 
